@@ -1,12 +1,13 @@
 import React from 'react';
 import Form from './components/Form';
+import Card from './components/Card';
 
 const stateAtributes = {
   name: '',
   description: '',
-  attr1: 0,
-  attr2: 0,
-  attr3: 0,
+  attr1: '',
+  attr2: '',
+  attr3: '',
   image: '',
   select: '',
   check: '',
@@ -23,9 +24,10 @@ class App extends React.Component {
   };
 
   handleState = ({ target }) => {
-    const { name, value } = target;
+    const valor = target.type === 'checkbox' ? target.checked : target.value;
+    const { name } = target;
     this.setState({
-      [name]: value,
+      [name]: valor,
     });
   };
 
@@ -36,7 +38,7 @@ class App extends React.Component {
         <div>
           <h1>Tryunfo</h1>
         </div>
-        <div>
+        <div className="formDiv">
           <Form
             cardName={ name }
             cardDescription={ description }
@@ -51,6 +53,16 @@ class App extends React.Component {
             onSaveButtonClick={ this.btnClick }
           />
         </div>
+        <Card
+          cardName={ name }
+          cardDescription={ description }
+          cardAttr1={ attr1 }
+          cardAttr2={ attr2 }
+          cardAttr3={ attr3 }
+          cardImage={ image }
+          cardRare={ select }
+          cardTrunfo={ check }
+        />
       </>
     );
   }
