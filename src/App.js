@@ -13,6 +13,7 @@ const stateAtributes = {
   check: false,
   btnDisable: true,
   allCards: [],
+  hasTrunfo: false,
 };
 
 class App extends React.Component {
@@ -22,10 +23,11 @@ class App extends React.Component {
   }
 
   btnClick = (e) => {
-    e.preventDefault();
     const {
       name, description, attr1, attr2, attr3, image, check, select, allCards,
     } = this.state;
+    e.preventDefault();
+    if (check === true) this.setState({ hasTrunfo: true });
     allCards.push({
       nome: name,
       desc: description,
@@ -43,6 +45,7 @@ class App extends React.Component {
       attr3: '0',
       select: '',
       check: false,
+      btnDisable: true,
     });
   };
 
@@ -101,6 +104,7 @@ class App extends React.Component {
       select,
       btnDisable,
       allCards,
+      hasTrunfo,
     } = this.state;
     return (
       <>
@@ -121,6 +125,7 @@ class App extends React.Component {
             onInputChange={ this.handleState }
             onSaveButtonClick={ this.btnClick }
             allCards={ allCards }
+            hasTrunfo={ hasTrunfo }
           />
         </div>
         <Card
