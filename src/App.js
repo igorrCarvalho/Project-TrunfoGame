@@ -5,13 +5,14 @@ import Card from './components/Card';
 const stateAtributes = {
   name: '',
   description: '',
-  attr1: '',
-  attr2: '',
-  attr3: '',
+  attr1: '0',
+  attr2: '0',
+  attr3: '0',
   image: '',
   select: '',
   check: false,
   btnDisable: true,
+  allCards: [],
 };
 
 class App extends React.Component {
@@ -20,8 +21,29 @@ class App extends React.Component {
     this.state = stateAtributes;
   }
 
-  btnClick = () => {
-
+  btnClick = (e) => {
+    e.preventDefault();
+    const {
+      name, description, attr1, attr2, attr3, image, check, select, allCards,
+    } = this.state;
+    allCards.push({
+      nome: name,
+      desc: description,
+      attr: [attr1, attr2, attr3],
+      img: image,
+      trunfo: check,
+      rarity: select,
+    });
+    this.setState({
+      name: '',
+      description: '',
+      image: '',
+      attr1: '0',
+      attr2: '0',
+      attr3: '0',
+      select: '',
+      check: false,
+    });
   };
 
   handleState = ({ target }) => {
@@ -78,6 +100,7 @@ class App extends React.Component {
       check,
       select,
       btnDisable,
+      allCards,
     } = this.state;
     return (
       <>
@@ -97,6 +120,7 @@ class App extends React.Component {
             isSaveButtonDisabled={ btnDisable }
             onInputChange={ this.handleState }
             onSaveButtonClick={ this.btnClick }
+            allCards={ allCards }
           />
         </div>
         <Card
