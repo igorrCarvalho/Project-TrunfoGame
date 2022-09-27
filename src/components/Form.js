@@ -108,14 +108,19 @@ class Form extends Component {
         {hasTrunfo === true
           && <h4>Você já tem um Super Trunfo em seu baralho</h4>}
         {hasTrunfo === false
-          && <input
-            onChange={ onInputChange }
-            checked={ cardTrunfo }
-            id="check"
-            name="check"
-            type="checkbox"
-            data-testid="trunfo-input"
-          />}
+          && (
+            <label htmlFor="check">
+              <input
+                onChange={ onInputChange }
+                checked={ cardTrunfo }
+                id="check"
+                name="check"
+                type="checkbox"
+                data-testid="trunfo-input"
+              />
+              Super Trunfo
+            </label>
+          )}
 
         <button
           disabled={ isSaveButtonDisabled }

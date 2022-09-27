@@ -28,7 +28,7 @@ class App extends React.Component {
     } = this.state;
     e.preventDefault();
     if (check === true) this.setState({ hasTrunfo: true });
-    allCards.push({
+    const newItem = {
       nome: name,
       desc: description,
       attr1,
@@ -37,7 +37,9 @@ class App extends React.Component {
       img: image,
       trunfo: check,
       rarity: select,
-    });
+    };
+    const newState = [...allCards, newItem];
+    this.setState({ allCards: newState });
     this.setState({
       name: '',
       description: '',
@@ -97,7 +99,10 @@ class App extends React.Component {
   btnDiscart = (index) => {
     const { allCards } = this.state;
     const filteredArr = allCards.filter((_obj, ind) => ind !== index);
-    this.setState({ allCards: filteredArr, hasTrunfo: false });
+    if (allCards[index].trunfo === true) {
+      return this.setState({ allCards: filteredArr, hasTrunfo: false });
+    }
+    this.setState({ allCards: filteredArr });
   };
 
   render() {
