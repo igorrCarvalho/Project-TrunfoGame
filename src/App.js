@@ -31,7 +31,9 @@ class App extends React.Component {
     allCards.push({
       nome: name,
       desc: description,
-      attr: [attr1, attr2, attr3],
+      attr1,
+      attr2,
+      attr3,
       img: image,
       trunfo: check,
       rarity: select,
@@ -138,6 +140,21 @@ class App extends React.Component {
           cardRare={ select }
           cardTrunfo={ check }
         />
+        <div>
+          { allCards.map((obj, index) => (
+            <Card
+              key={ index }
+              cardName={ obj.nome }
+              cardDescription={ obj.desc }
+              cardAttr1={ obj.attr1 }
+              cardAttr2={ obj.attr2 }
+              cardAttr3={ obj.attr3 }
+              cardImage={ obj.img }
+              cardRare={ obj.rarity }
+              cardTrunfo={ obj.trunfo }
+            />
+          )) }
+        </div>
       </>
     );
   }
