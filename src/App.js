@@ -94,6 +94,12 @@ class App extends React.Component {
     });
   };
 
+  btnDiscart = (index) => {
+    const { allCards } = this.state;
+    const filteredArr = allCards.filter((_obj, ind) => ind !== index);
+    this.setState({ allCards: filteredArr, hasTrunfo: false });
+  };
+
   render() {
     const {
       name,
@@ -130,20 +136,21 @@ class App extends React.Component {
             hasTrunfo={ hasTrunfo }
           />
         </div>
-        <Card
-          cardName={ name }
-          cardDescription={ description }
-          cardAttr1={ attr1 }
-          cardAttr2={ attr2 }
-          cardAttr3={ attr3 }
-          cardImage={ image }
-          cardRare={ select }
-          cardTrunfo={ check }
-        />
         <div>
-          { allCards.map((obj, index) => (
+          <Card
+            cardName={ name }
+            cardDescription={ description }
+            cardAttr1={ attr1 }
+            cardAttr2={ attr2 }
+            cardAttr3={ attr3 }
+            cardImage={ image }
+            cardRare={ select }
+            cardTrunfo={ check }
+          />
+        </div>
+        { allCards.map((obj, index) => (
+          <div key={ index }>
             <Card
-              key={ index }
               cardName={ obj.nome }
               cardDescription={ obj.desc }
               cardAttr1={ obj.attr1 }
@@ -153,8 +160,15 @@ class App extends React.Component {
               cardRare={ obj.rarity }
               cardTrunfo={ obj.trunfo }
             />
-          )) }
-        </div>
+            <button
+              data-testid="delete-button"
+              type="button"
+              onClick={ () => this.btnDiscart(index) }
+            >
+              Excluir
+            </button>
+          </div>
+        )) }
       </>
     );
   }
