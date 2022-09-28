@@ -2,6 +2,7 @@ import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
 import NameSearch from './components/NameSearch';
+import RarityFltr from './components/RarityFltr';
 
 const stateAtributes = {
   name: '',
@@ -16,6 +17,7 @@ const stateAtributes = {
   allCards: [],
   hasTrunfo: false,
   nameSearch: '',
+  rarityFilter: 'todas',
 };
 
 class App extends React.Component {
@@ -112,6 +114,20 @@ class App extends React.Component {
     this.setState({ allCards: filteredArr });
   };
 
+  allFilters = () => {
+    const { rarityFilter, nameSearch, allCards } = this.state;
+    if (nameSearch) {
+      return allCards.filter((card) => card.nome.toLowerCase()
+        .includes(nameSearch.toLowerCase()));
+    }
+    if (rarityFilter === 'todas') {
+      return allCards;
+    }
+    if (rarityFilter) {
+      return allCards.filter((obj) => obj.rarity === rarityFilter);
+    }
+  };
+
   render() {
     const {
       name,
@@ -126,7 +142,9 @@ class App extends React.Component {
       allCards,
       hasTrunfo,
       nameSearch,
+      rarityFilter,
     } = this.state;
+    const filterChoosed = this.allFilters();
     return (
       <>
         <div>
@@ -165,29 +183,29 @@ class App extends React.Component {
           <h3>Todas as cartas</h3>
           <div>
             <NameSearch text={ nameSearch } filterFunc={ this.filterItems } />
+            <RarityFltr rare={ rarityFilter } handleState={ this.handleState } />
           </div>
-          { allCards.filter((card) => card.nome.includes(nameSearch))
-            .map((obj, index) => (
-              <div key={ index }>
-                <Card
-                  cardName={ obj.nome }
-                  cardDescription={ obj.desc }
-                  cardAttr1={ obj.attr1 }
-                  cardAttr2={ obj.attr2 }
-                  cardAttr3={ obj.attr3 }
-                  cardImage={ obj.img }
-                  cardRare={ obj.rarity }
-                  cardTrunfo={ obj.trunfo }
-                />
-                <button
-                  data-testid="delete-button"
-                  type="button"
-                  onClick={ () => this.btnDiscart(index) }
-                >
-                  Excluir
-                </button>
-              </div>
-            ))}
+          { filterChoosed.map((obj, index) => (
+            <div key={ index }>
+              <Card
+                cardName={ obj.nome }
+                cardDescription={ obj.desc }
+                cardAttr1={ obj.attr1 }
+                cardAttr2={ obj.attr2 }
+                cardAttr3={ obj.attr3 }
+                cardImage={ obj.img }
+                cardRare={ obj.rarity }
+                cardTrunfo={ obj.trunfo }
+              />
+              <button
+                data-testid="delete-button"
+                type="button"
+                onClick={ () => this.btnDiscart(index) }
+              >
+                Excluir
+              </button>
+            </div>
+          ))}
         </div>
       </>
     );

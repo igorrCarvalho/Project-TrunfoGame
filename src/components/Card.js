@@ -16,7 +16,12 @@ class Card extends Component {
     return (
       <>
         <h3 data-testid="name-card">{ cardName }</h3>
-        <img data-testid="image-card" src={ cardImage } alt={ cardName } />
+        <img
+          className="image"
+          data-testid="image-card"
+          src={ cardImage }
+          alt={ cardName }
+        />
         <p data-testid="description-card">{ cardDescription }</p>
         <h4 data-testid="attr1-card">{ cardAttr1 }</h4>
         <h4 data-testid="attr2-card">{ cardAttr2 }</h4>
