@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 
 class NameSearch extends Component {
   render() {
-    const { text, filterFunc } = this.props;
+    const { disable, text, filterFunc } = this.props;
     return (
       <input
+        disabled={ disable }
         onChange={ filterFunc }
         value={ text }
         type="text"
@@ -19,6 +20,7 @@ class NameSearch extends Component {
 NameSearch.propTypes = {
   text: PropTypes.string.isRequired,
   filterFunc: PropTypes.func.isRequired,
+  disable: PropTypes.bool.isRequired,
 };
 
 export default NameSearch;

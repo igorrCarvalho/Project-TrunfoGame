@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 
 class RarityFltr extends Component {
   render() {
-    const { rare, handleState } = this.props;
+    const { disable, rare, handleState } = this.props;
     return (
       <select
+        disabled={ disable }
         value={ rare }
         onChange={ handleState }
         name="rarityFilter"
@@ -23,6 +24,7 @@ class RarityFltr extends Component {
 RarityFltr.propTypes = {
   rare: PropTypes.string.isRequired,
   handleState: PropTypes.func.isRequired,
+  disable: PropTypes.bool.isRequired,
 };
 
 export default RarityFltr;

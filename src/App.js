@@ -3,6 +3,7 @@ import Form from './components/Form';
 import Card from './components/Card';
 import NameSearch from './components/NameSearch';
 import RarityFltr from './components/RarityFltr';
+import TrunfoFilter from './components/TrunfoFilter';
 
 const stateAtributes = {
   name: '',
@@ -18,6 +19,7 @@ const stateAtributes = {
   hasTrunfo: false,
   nameSearch: '',
   rarityFilter: 'todas',
+  trunfoFilter: false,
 };
 
 class App extends React.Component {
@@ -115,7 +117,8 @@ class App extends React.Component {
   };
 
   allFilters = () => {
-    const { rarityFilter, nameSearch, allCards } = this.state;
+    const { trunfoFilter, rarityFilter, nameSearch, allCards } = this.state;
+    if (trunfoFilter) return allCards.filter((obj) => obj.trunfo);
     if (nameSearch) {
       return allCards.filter((card) => card.nome.toLowerCase()
         .includes(nameSearch.toLowerCase()));
@@ -143,6 +146,7 @@ class App extends React.Component {
       hasTrunfo,
       nameSearch,
       rarityFilter,
+      trunfoFilter,
     } = this.state;
     const filterChoosed = this.allFilters();
     return (
@@ -182,8 +186,17 @@ class App extends React.Component {
         <div>
           <h3>Todas as cartas</h3>
           <div>
-            <NameSearch text={ nameSearch } filterFunc={ this.filterItems } />
-            <RarityFltr rare={ rarityFilter } handleState={ this.handleState } />
+            <NameSearch
+              disable={ trunfoFilter }
+              text={ nameSearch }
+              filterFunc={ this.filterItems }
+            />
+            <RarityFltr
+              disable={ trunfoFilter }
+              rare={ rarityFilter }
+              handleState={ this.handleState }
+            />
+            <TrunfoFilter isChecked={ trunfoFilter } handleState={ this.handleState } />
           </div>
           { filterChoosed.map((obj, index) => (
             <div key={ index }>
