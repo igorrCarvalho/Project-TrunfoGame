@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@700&display=swap');
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,6 +8,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #0d1117;
 }
 
 code {
@@ -12,6 +16,245 @@ code {
     monospace;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 .image {
-  width: 200px;
+  width: 100%;
+}
+
+.formDiv {
+  border-radius: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  display: flex;
+  border: 1px solid black;
+  width: 80%;
+  height: 700px;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgb(223, 223, 223);  
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 404px;
+  height: 593px;
+  font-family: Kanit;
+}
+
+.nameInput {
+  border: 1px solid #29313D;
+  width: 90%;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.descInput {
+  border: 1px solid #29313D;
+  width: 90%;
+  height: 80px;
+  margin-bottom: 15px;
+  margin-top: 10px;
+  resize: none;
+}
+
+.attr1Input {
+  border: 1px solid #29313D;
+  margin-left: 10px;
+  width: 77%;
+  height: 30px;
+  margin-bottom: 5px;
+}
+
+.attr2Input {
+  border: 1px solid #29313D;
+  margin-left: 10px;
+  width: 77%;
+  height: 30px;
+  margin-bottom: 5px;
+}
+
+.attr3Input {
+  border: 1px solid #29313D;
+  margin-left: 10px;
+  width: 77%;
+  height: 30px;
+  margin-bottom: 5px;
+}
+
+.counter {
+  text-align: center;
+}
+
+.imgInput {
+  border: 1px solid #29313D;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  width: 72%;
+  height: 30px;
+}
+
+.rareInput {
+  border: 1px solid #29313D;
+  margin-top: 10px;
+  width: 90%;
+  height: 40px;
+}
+
+.checkLabel {
+  width: 40%;
+  margin-left: 29px;
+  
+}
+
+.submitBtn {
+  color: white;
+  padding: 8px 32px;
+  background-color: rgb(85, 29, 189);
+  border-radius: 2px;
+  margin-top: 5px;
+  margin-left: 30px;
+  width: 115px;
+}
+
+.totalCount {
+  text-align: right;
+  font-weight: 700;
+  margin-right: 10%;
+}
+
+.formTitle {
+  color: rgb(85, 29, 189);
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 10px;
+  font-family: Epilogue;
+  font-weight: 800;
+}
+
+.cardPreview {
+  border-radius: 10px;
+  width: 340px;
+  height: 515px;
+  background-color: rgb(85, 29, 189);
+}
+
+.cardWhite {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 360px;
+  height: 534px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.25);
+}
+
+.atributes {
+  display: flex;
+  flex-flow: column;
+  margin-left: auto;
+  margin-right: auto;
+  width: 308px;
+  height: 200px;
+  background-color: white;
+  border-radius: 10px;
+  text-align: center;
+  font-family: Epilogue;
+}
+
+.CardTitle {
+  margin-top: 20px;
+  background-color: white;
+  width: 308px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 38px;
+  border-radius: 5px;
+  font-family: Epilogue;
+  font-size: 27px;
+  text-align: right;
+  padding-top: 5px;
+}
+
+.img {
+  width: 308px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.desc {
+  width: 100%;
+}
+
+.previewTitle {
+  
+  margin-right: 15px;
+}
+
+.deleteCard {
+  border-radius: 10px;
+  background-color: rgb(35, 8, 72);
+  margin-top: 20px;
+  margin-left: 33%;
+  padding: 5px;
+  width: 115px;
+  color: white;
+}
+
+.gameTitle {
+  text-align: center;
+  color: rgb(85, 29, 189);
+  font-family: Epilogue;
+  background-color: rgb(223, 223, 223);
+  margin-bottom: 60px;
+  padding: 5px;
+}
+
+.filtersDiv {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 20px;
+  background-color: rgb(223, 223, 223);
+  width: 80%;
+  padding: 30px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.nameFilter {
+  width: 252px;
+  height: 45px;
+}
+
+.rarityFilter {
+  width: 252px;
+  height: 45px;
+}
+
+.allCardsTitle {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-family: Epilogue;
+  font-size: 28px;
+  color: rgb(85, 29, 189);
+}
+
+.cardsDiv {
+  align-items: center;
+  justify-content: space-around;
+  display: flex;
+  border-radius: 20px;
+  background-color: rgb(223, 223, 223);
+  width: 80%;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 30px;
 }

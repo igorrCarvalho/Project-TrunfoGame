@@ -6,6 +6,7 @@ class RarityFltr extends Component {
     const { disable, rare, handleState } = this.props;
     return (
       <select
+        className="rarityFilter"
         disabled={ disable }
         value={ rare }
         onChange={ handleState }

@@ -26,14 +26,25 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = stateAtributes;
+    this.filterItems = this.filterItems.bind(this);
+    this.btnClick = this.btnClick.bind(this);
+    this.handleState = this.handleState.bind(this);
+    this.checkInputs = this.checkInputs.bind(this);
+    this.checkAttr = this.checkAttr.bind(this);
+    this.returnBtnDisable = this.returnBtnDisable.bind(this);
+    this.btnDiscart = this.btnDiscart.bind(this);
+    this.allFilters = this.allFilters.bind(this);
   }
 
-  filterItems = ({ target }) => {
-    const { value } = target;
-    this.setState({ nameSearch: value });
-  };
+  handleState({ target }) {
+    const valor = target.type === 'checkbox' ? target.checked : target.value;
+    const { name } = target;
+    this.setState({
+      [name]: valor,
+    }, () => this.returnBtnDisable());
+  }
 
-  btnClick = (e) => {
+  btnClick(e) {
     const {
       name, description, attr1, attr2, attr3, image, check, select, allCards,
     } = this.state;
@@ -62,22 +73,19 @@ class App extends React.Component {
       check: false,
       btnDisable: true,
     });
-  };
+  }
 
-  handleState = ({ target }) => {
-    const valor = target.type === 'checkbox' ? target.checked : target.value;
-    const { name } = target;
-    this.setState({
-      [name]: valor,
-    }, () => this.returnBtnDisable());
-  };
+  filterItems({ target }) {
+    const { value } = target;
+    this.setState({ nameSearch: value });
+  }
 
-  checkInputs = () => {
+  checkInputs() {
     const { name, description, image, select } = this.state;
     return (!name || !description || !image || !select);
-  };
+  }
 
-  checkAttr = () => {
+  checkAttr() {
     const { attr1, attr2, attr3 } = this.state;
     const numberAttr1 = Number(attr1);
     const numberAttr2 = Number(attr2);
@@ -92,9 +100,9 @@ class App extends React.Component {
       || numberAttr3 > maxAttrValue
       || numberAttr1 < 0 || numberAttr2 < 0 || numberAttr3 < 0
     );
-  };
+  }
 
-  returnBtnDisable = () => {
+  returnBtnDisable() {
     const verifyInput = this.checkInputs();
     const verifyAttr = this.checkAttr();
     if (verifyInput === true || verifyAttr === true) {
@@ -105,18 +113,18 @@ class App extends React.Component {
     this.setState({
       btnDisable: false,
     });
-  };
+  }
 
-  btnDiscart = (index) => {
+  btnDiscart(index) {
     const { allCards } = this.state;
     const filteredArr = allCards.filter((_obj, ind) => ind !== index);
     if (allCards[index].trunfo === true) {
       return this.setState({ allCards: filteredArr, hasTrunfo: false });
     }
     this.setState({ allCards: filteredArr });
-  };
+  }
 
-  allFilters = () => {
+  allFilters() {
     const { trunfoFilter, rarityFilter, nameSearch, allCards } = this.state;
     if (trunfoFilter) return allCards.filter((obj) => obj.trunfo);
     if (nameSearch) {
@@ -129,7 +137,7 @@ class App extends React.Component {
     if (rarityFilter) {
       return allCards.filter((obj) => obj.rarity === rarityFilter);
     }
-  };
+  }
 
   render() {
     const {
@@ -152,7 +160,7 @@ class App extends React.Component {
     return (
       <>
         <div>
-          <h1>Tryunfo</h1>
+          <h1 className="gameTitle">Tryunfo</h1>
         </div>
         <div className="formDiv">
           <Form
@@ -170,22 +178,25 @@ class App extends React.Component {
             allCards={ allCards }
             hasTrunfo={ hasTrunfo }
           />
+          <div className="cardWhite">
+            <div className="cardPreview">
+              <Card
+                cardName={ name }
+                cardDescription={ description }
+                cardAttr1={ attr1 }
+                cardAttr2={ attr2 }
+                cardAttr3={ attr3 }
+                cardImage={ image }
+                cardRare={ select }
+                cardTrunfo={ check }
+              />
+            </div>
+          </div>
         </div>
         <div>
-          <Card
-            cardName={ name }
-            cardDescription={ description }
-            cardAttr1={ attr1 }
-            cardAttr2={ attr2 }
-            cardAttr3={ attr3 }
-            cardImage={ image }
-            cardRare={ select }
-            cardTrunfo={ check }
-          />
-        </div>
-        <div>
-          <h3>Todas as cartas</h3>
-          <div>
+          <h3 className="allCardsTitle">Todas as cartas</h3>
+          <div className="filtersDiv">
+            <h3>Filtros de busca</h3>
             <NameSearch
               disable={ trunfoFilter }
               text={ nameSearch }
@@ -198,27 +209,32 @@ class App extends React.Component {
             />
             <TrunfoFilter isChecked={ trunfoFilter } handleState={ this.handleState } />
           </div>
-          { filterChoosed.map((obj, index) => (
-            <div key={ index }>
-              <Card
-                cardName={ obj.nome }
-                cardDescription={ obj.desc }
-                cardAttr1={ obj.attr1 }
-                cardAttr2={ obj.attr2 }
-                cardAttr3={ obj.attr3 }
-                cardImage={ obj.img }
-                cardRare={ obj.rarity }
-                cardTrunfo={ obj.trunfo }
-              />
-              <button
-                data-testid="delete-button"
-                type="button"
-                onClick={ () => this.btnDiscart(index) }
-              >
-                Excluir
-              </button>
-            </div>
-          ))}
+          <div className="cardsDiv">
+            { filterChoosed.map((obj, index) => (
+              <div className="cardWhite" key={ index }>
+                <div className="cardPreview">
+                  <Card
+                    cardName={ obj.nome }
+                    cardDescription={ obj.desc }
+                    cardAttr1={ obj.attr1 }
+                    cardAttr2={ obj.attr2 }
+                    cardAttr3={ obj.attr3 }
+                    cardImage={ obj.img }
+                    cardRare={ obj.rarity }
+                    cardTrunfo={ obj.trunfo }
+                  />
+                  <button
+                    className="deleteCard"
+                    data-testid="delete-button"
+                    type="button"
+                    onClick={ () => this.btnDiscart(index) }
+                  >
+                    Excluir
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </>
     );

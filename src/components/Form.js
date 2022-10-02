@@ -17,11 +17,17 @@ class Form extends Component {
       onSaveButtonClick,
       hasTrunfo,
     } = this.props;
+    const totalPoints = Number(cardAttr1) + Number(cardAttr2) + Number(cardAttr3);
+    let restPoints = 0;
+    const maxPoint = 210;
+    restPoints = maxPoint - totalPoints;
     return (
-      <form>
+      <form className="form">
+        <p className="formTitle">ADICIONE NOVA CARTA</p>
         <label htmlFor="nameInput">
           Nome
           <input
+            className="nameInput"
             value={ cardName }
             onChange={ onInputChange }
             name="name"
@@ -34,6 +40,7 @@ class Form extends Component {
         <label htmlFor="description">
           Descrição
           <textarea
+            className="descInput"
             value={ cardDescription }
             onChange={ onInputChange }
             name="description"
@@ -45,6 +52,7 @@ class Form extends Component {
         <label htmlFor="attr1">
           Attr1
           <input
+            className="attr1Input"
             value={ cardAttr1 }
             onChange={ onInputChange }
             type="number"
@@ -57,6 +65,7 @@ class Form extends Component {
         <label htmlFor="attr2">
           Attr2
           <input
+            className="attr2Input"
             value={ cardAttr2 }
             onChange={ onInputChange }
             type="number"
@@ -70,6 +79,7 @@ class Form extends Component {
         <label htmlFor="attr3">
           Attr3
           <input
+            className="attr3Input"
             value={ cardAttr3 }
             onChange={ onInputChange }
             type="number"
@@ -79,9 +89,12 @@ class Form extends Component {
           />
         </label>
 
+        <p className="counter">{`Pontos restantes = ${restPoints}`}</p>
+
         <label htmlFor="img">
           Imagem
           <input
+            className="imgInput"
             value={ cardImage }
             onChange={ onInputChange }
             type="text"
@@ -94,6 +107,7 @@ class Form extends Component {
         <label htmlFor="select">
           Raridade
           <select
+            className="rareInput"
             value={ cardRare }
             onChange={ onInputChange }
             name="select"
@@ -105,12 +119,16 @@ class Form extends Component {
             <option value="muito raro">muito raro</option>
           </select>
         </label>
+
+        <p className="totalCount">{ `Total de pontos = ${totalPoints}` }</p>
+
         {hasTrunfo === true
-          && <h4>Você já tem um Super Trunfo em seu baralho</h4>}
+          && <h4 className="lockTxt">Você já tem um Super Trunfo em seu baralho</h4>}
         {hasTrunfo === false
           && (
-            <label htmlFor="check">
+            <label className="checkLabel" htmlFor="check">
               <input
+                className="trunfoInput"
                 onChange={ onInputChange }
                 checked={ cardTrunfo }
                 id="check"
@@ -123,6 +141,7 @@ class Form extends Component {
           )}
 
         <button
+          className="submitBtn"
           disabled={ isSaveButtonDisabled }
           onClick={ onSaveButtonClick }
           type="submit"

@@ -6,6 +6,8 @@ class NameSearch extends Component {
     const { disable, text, filterFunc } = this.props;
     return (
       <input
+        className="nameFilter"
+        placeholder="Nome da carta"
         disabled={ disable }
         onChange={ filterFunc }
         value={ text }
