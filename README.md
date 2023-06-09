@@ -1,4 +1,4 @@
-# Welcome to the project Tryunfo repositorie!
+# Welcome to the project Trunfo repositorie!
 
 This project was made using the TDD (Test Driven Development) method. It simulates a trunfo card game. You can choose which trunfo cards theme you want. The card Title, image, description, rarity and atributtes are choosed typing in the form. A preview card will show your new card. The save button is disabled if the atributes pass 210. Each one of the atributtes can't pass 90. In the image input you must add the image source. By clicking the save button the card is added to your stash. In the filter section the user can filter your cards by: Name, rarity and trunfo. The user can also remove each card by clicking the delete button.
 ![ezgif com-gif-maker (7)](https://user-images.githubusercontent.com/64559670/193482038-2288846d-8f7a-4a96-97a8-3641d37acfc0.gif)
